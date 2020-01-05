@@ -428,7 +428,7 @@ if django_greater_than('1.4'):
             class Meta:
                 app_label = 'django_dynamic_fixture'
     except ImportError:
-        pass
+        print('Library `jsonfield` not installed. Skipping.')
 
 
 try:
@@ -438,4 +438,26 @@ try:
         class Meta:
             app_label = 'django_dynamic_fixture'
 except ImportError:
-    pass
+    print('Library `django-json-field` not installed. Skipping.')
+
+
+try:
+    from polymorphic.models import PolymorphicModel
+    class ModelPolymorphic(PolymorphicModel):
+        class Meta:
+            verbose_name = 'Polymorphic Model'
+
+
+    class ModelPolymorphic2(ModelPolymorphic):
+        class Meta:
+            verbose_name = 'Polymorphic Model 2'
+
+
+    class ModelPolymorphic3(ModelPolymorphic):
+        class CannotSave(Exception):
+            pass
+
+        def save(self):
+            raise self.CannotSave
+except ImportError:
+    print('Library `django_polymorphic` not installed. Skipping.')
