@@ -469,7 +469,7 @@ class DynamicFixture(object):
             raise InvalidModelError(get_unique_model_name(model_class))
         try:
             # https://github.com/paulocheque/django-dynamic-fixture/pull/112
-            from polymorphic import PolymorphicModel
+            from polymorphic.models import PolymorphicModel
             is_polymorphic = isinstance(instance, PolymorphicModel)
         except ImportError:
             # Django-polymorphic is not installed so the model can't be polymorphic.
